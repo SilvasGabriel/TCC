@@ -1,2 +1,2 @@
 # TCC
- Repositótio criado para o trabalho de conclusão de curso.
+ Repositório criado para o trabalho de conclusão de curso.
