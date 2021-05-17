@@ -99,6 +99,10 @@ color: var(--cor-preta);
 
 
 /*Componentes CSS*/
+.mr-auto > a {
+  margin-right: 60px;
+  margin-left: 60px;
+}
 
 /*Error Componente*/
 .erro-pagina {

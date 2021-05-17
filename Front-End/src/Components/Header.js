@@ -17,30 +17,31 @@ export default function Header () {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         
         <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-                
+           
+            <Nav className="mr-auto" >
+                    
                 <Nav.Link >
                     <Link to="/">
                         Home
                     </Link>
                 </Nav.Link>
-                
-                <Nav.Link  >
+                    
+                <Nav.Link >
                     Criar Post
                 </Nav.Link>
 
                 <Nav.Link >
                     Postagens
                 </Nav.Link>
-                
+                    
                 <Nav.Link >
                     <Link to="/about">
-                        About
+                        Sobre
                     </Link>
                 </Nav.Link>
 
-             
             </Nav>
+         
 
             <Nav>
                 

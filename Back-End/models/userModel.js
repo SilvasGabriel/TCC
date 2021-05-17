@@ -1,12 +1,11 @@
+//Importe o mongoose para modelar o banco de dados
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-
-//Pensando em usar JWT 
+//Importe o bcriptjs para dar um hash nas senhas
+const bcript = require('bcryptjs')
 
 const UserSchema = new Schema({
   name: {
-      firstName: String,
-      lastName: String,
+      type:String,
       required: true
   },
   email: {
@@ -44,5 +43,21 @@ const UserSchema = new Schema({
 })
 
 const User = mongoose.model('user', UserSchema)
+
+//Checar a senha,salvar e hash
+
+UserSchema.methods.matchPassword = async function (enteredPassword){
+  return await bcript.compare(enteredPassword, this.password)
+}
+
+UserSchema.pre('save', async function (next){
+  if(!this.isModified('password')){
+    next()
+  }
+
+  const salt = await bcript.genSalt(10)
+  this.password = await bcript.hash(this.password, salt)
+
+})
 
 module.exports = User;

@@ -7,6 +7,8 @@ dotenv.config()
 
 const app = express()
 
+app.use(express.json())
+
 const PORTA = process.env.PORTA || 5000
 
 app.listen(
