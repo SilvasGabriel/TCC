@@ -6,13 +6,15 @@ import {
    acessarPerfilUsuario,
    registrarUsuario,
    atualizarPerfilUsuario,
+   acessarUsuarios,
 } from '../controllers/usuarioController.js'
 
 import {
    proteger,
+   administrador,
 } from '../middleware/autorizarMiddleware.js'
 
-router.route('/').post(registrarUsuario)
+router.route('/').post(registrarUsuario).get(proteger, administrador, acessarUsuarios)
 
 router.post('/login', autenticarUsuario)
 

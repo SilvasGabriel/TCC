@@ -39,6 +39,19 @@ const proteger = asyncHandler( async(req, res, next)=> {
     
 })
 
+const administrador  = (req, res, next) => {
+
+    if(req.usuario && req.usuario.isAdmin){
+        next()
+    }else{
+        res.status(401)
+        throw new Error('Não autorizado como administrador!')
+    }
+
+}
+
+
 export {
     proteger,
+    administrador,
 }

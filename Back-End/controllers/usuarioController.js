@@ -153,9 +153,24 @@ const atualizarPerfilUsuario = asyncHandler( async(req, res) => {
 
 }) 
 
+
+//@descrição  Administrador acessa todos os usuários
+//@rotas  GET /api/users
+//@acesso Privado/Administrador
+
+const acessarUsuarios = asyncHandler (async (req, res)=> {
+
+    const usuarios = await User.find({})
+ 
+   res.json(usuarios)
+ 
+ })
+ 
+
 export {
     autenticarUsuario,
     acessarPerfilUsuario,
     registrarUsuario,
     atualizarPerfilUsuario,
+    acessarUsuarios,
 }
