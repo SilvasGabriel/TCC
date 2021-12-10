@@ -1,0 +1,30 @@
+{
+  "name": "tcc",
+  "version": "1.0.0",
+  "description": "MERN Blog",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node Back-End/server",
+    "server": "nodemon Back-End/server",
+    "client": "npm start --prefix Front-End",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node Back-End/seeder",
+    "data:destroy": "node Back-End/seeder -d",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Silva",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.14"
+  },
+  "devDependencies": {
+    "concurrently": "^6.4.0",
+    "nodemon": "^2.0.15"
+  }
+}

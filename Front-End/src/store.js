@@ -1,0 +1,53 @@
+//Redux
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+
+//redux-thunk
+import thunk from 'redux-thunk'
+
+//redux-devtools
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+//postagensReducer
+import {
+    postagemListaReducer,
+    postagemDetalhesReducer,
+} from './Redux/Reducers/postagemReducers'
+
+//usuariosReducer
+import {
+    usuarioLoginReducer,
+    usuarioRegisterReducer,
+    usuarioDetalhesReducer,
+    usuarioAtualizarReducer,
+} from './Redux/Reducers/usuarioReducers'
+
+const reducer = combineReducers({
+
+    //Reducers para postagem
+    postagemLista: postagemListaReducer,
+    postagemDetalhes: postagemDetalhesReducer,
+    //Reducers para usuarios
+    usuarioLogin: usuarioLoginReducer,
+    usuarioRegister: usuarioRegisterReducer,
+    usuarioDetalhes: usuarioDetalhesReducer,
+    usuarioAtualizar: usuarioAtualizarReducer,
+})
+
+
+const userInfoFromStorage = localStorage.getItem('usuarioInfo') ? JSON.parse(localStorage.getItem('usuarioInfo')) : null
+
+const initialState = {
+    usuarioLogin: { usuarioInfo: userInfoFromStorage},
+}
+
+const middleware = [thunk]
+
+const store = createStore(
+    reducer, 
+    initialState, 
+    composeWithDevTools(
+        applyMiddleware(...middleware)
+    )
+)
+
+export default store
