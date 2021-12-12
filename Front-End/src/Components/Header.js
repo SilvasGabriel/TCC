@@ -55,9 +55,6 @@ const Header = () => {
                             <LinkContainer to='/sobre' style={{ color: "white" }}>
                                 <Nav.Link className="navlink">Sobre</Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to='/criar' style={{ color: "white" }} >
-                                <Nav.Link className="navlink">Criar Postagem</Nav.Link>
-                            </LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
 
@@ -67,18 +64,36 @@ const Header = () => {
                             {usuarioInfo ? (
 
                                 <NavDropdown title={usuarioInfo.name} id='username' className='nameNavbar'>
-
                                     <LinkContainer to="/perfil">
                                         <NavDropdown.Item>
                                             Perfil
                                         </NavDropdown.Item>
                                     </LinkContainer>
 
+                                    {usuarioInfo && usuarioInfo.isAdmin && (
+                                        <>
+                                            <LinkContainer to="/admin/usuarios">
+                                                <NavDropdown.Item>
+                                                    Usuarios
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
+
+                                            <LinkContainer to="/admin/postagens">
+                                                <NavDropdown.Item>
+                                                    Postagens
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
+
+                                        </>
+                                    )}
+
                                     <NavDropdown.Item onClick={logoutHandler}>
                                         Sair
                                     </NavDropdown.Item>
 
                                 </NavDropdown>
+
+
 
                             ) : (
                                 <>
@@ -91,6 +106,7 @@ const Header = () => {
                                     </LinkContainer>
                                 </>
                             )}
+
 
                         </Nav>
                     </Navbar.Collapse>

@@ -15,10 +15,13 @@ import {
 
 //usuariosReducer
 import {
+    //usuarios
     usuarioLoginReducer,
     usuarioRegisterReducer,
     usuarioDetalhesReducer,
     usuarioAtualizarReducer,
+    //usuários administradores
+    usuarioListarReducer,
 } from './Reducers/usuarioReducers'
 
 const reducer = combineReducers({
@@ -31,6 +34,7 @@ const reducer = combineReducers({
     usuarioRegister: usuarioRegisterReducer,
     usuarioDetalhes: usuarioDetalhesReducer,
     usuarioAtualizar: usuarioAtualizarReducer,
+    usuarioListar: usuarioListarReducer,
 })
 
 

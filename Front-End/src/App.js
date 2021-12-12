@@ -16,6 +16,7 @@ import PostScreen from './Screens/PostScreen'
 import LoginScreen from './Screens/LoginScreen'
 import RegistroScreen from './Screens/RegistroScreen'
 import PerfilScreen from './Screens/PerfilScreen'
+import UsuariosScreen from './ScreensAdmin/UsuariosScreen'
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
             <Route path='/register' component={RegistroScreen} />
             <Route path='/perfil' component={PerfilScreen} />
             <Route path='/postagem/:id' component={PostScreen}/>
+            <Route path='/admin/usuarios' component={UsuariosScreen}/>
             <Route exact path='/' component={HomeScreen}/>  
         </Container>
       </main>

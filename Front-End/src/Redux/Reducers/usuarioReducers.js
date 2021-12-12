@@ -1,4 +1,5 @@
 import {
+    //usuários normais
     USUARIO_LOGIN_REQUEST,
     USUARIO_LOGIN_SUCCESS,
     USUARIO_LOGIN_FAIL,
@@ -17,6 +18,11 @@ import {
     USUARIO_ATUALIZAR_SUCCESS,
     USUARIO_ATUALIZAR_FAIL,
     USUARIO_ATUALIZAR_RESET,
+
+    //usuários administradores
+    USUARIO_ADMIN_LISTAR_REQUEST,
+    USUARIO_ADMIN_LISTAR_SUCCESS,
+    USUARIO_ADMIN_LISTAR_FAIL,
 } from '../Constants/usuariosConstants'
 
 
@@ -104,6 +110,26 @@ export const usuarioAtualizarReducer = (state = { }, action) => {
         
         case USUARIO_ATUALIZAR_RESET:
             return {} 
+        
+        default:
+            return state
+    }
+
+}
+
+//Reducer para os administradores listarem os usuários
+export const usuarioListarReducer = (state = { usuarios: [] }, action) => {
+    
+    switch (action.type){
+
+        case USUARIO_ADMIN_LISTAR_REQUEST:
+            return {loading: true }
+
+        case USUARIO_ADMIN_LISTAR_SUCCESS:
+            return {loading: false, usuarios: action.payload}
+
+        case USUARIO_ADMIN_LISTAR_FAIL:
+            return {loading: false, error: action.payload}
         
         default:
             return state

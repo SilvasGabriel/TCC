@@ -1,4 +1,5 @@
 import {
+    //usuários
     USUARIO_LOGIN_REQUEST,
     USUARIO_LOGIN_SUCCESS,
     USUARIO_LOGIN_FAIL,
@@ -17,6 +18,11 @@ import {
     USUARIO_ATUALIZAR_SUCCESS,
     USUARIO_ATUALIZAR_FAIL,
     USUARIO_ATUALIZAR_RESET,
+
+    //usuários administradores
+    USUARIO_ADMIN_LISTAR_REQUEST,
+    USUARIO_ADMIN_LISTAR_SUCCESS,
+    USUARIO_ADMIN_LISTAR_FAIL,
 } from '../Constants/usuariosConstants'
 
 import axios from 'axios'
@@ -187,4 +193,37 @@ export const atualizarPerfil = (usuario) => async(dispatch, getState) => {
     }
 }
 
+//Action para o administrador listar os usuários
+export const listarUsuários = () => async(dispatch, getState) => {
 
+    try {
+        
+        dispatch ({
+            type: USUARIO_ADMIN_LISTAR_REQUEST,
+        })
+
+        const { usuarioLogin: { usuarioInfo } } = getState()
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${usuarioInfo.token}`
+            }
+        }
+
+        const { data } = await axios.get('/api/users', config)
+
+        dispatch({
+            type: USUARIO_ADMIN_LISTAR_SUCCESS,
+            payload: data,
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type: USUARIO_ADMIN_LISTAR_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message 
+            : error.message,
+        })
+
+    }
+}
