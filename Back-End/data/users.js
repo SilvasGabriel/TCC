@@ -33,7 +33,6 @@ const users = [
         faculdade:'',
         matricula:'',
         password: bcrypt.hashSync('123456', 10),
-        isAdmin: true,
     }
 ]
 

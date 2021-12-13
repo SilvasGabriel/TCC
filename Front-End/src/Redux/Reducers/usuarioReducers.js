@@ -23,6 +23,12 @@ import {
     USUARIO_ADMIN_LISTAR_REQUEST,
     USUARIO_ADMIN_LISTAR_SUCCESS,
     USUARIO_ADMIN_LISTAR_FAIL,
+    USUARIO_ADMIN_LISTAR_RESET,
+
+
+    USUARIO_ADMIN_DELETAR_REQUEST,
+    USUARIO_ADMIN_DELETAR_SUCCESS,
+    USUARIO_ADMIN_DELETAR_FAIL,
 } from '../Constants/usuariosConstants'
 
 
@@ -131,6 +137,30 @@ export const usuarioListarReducer = (state = { usuarios: [] }, action) => {
         case USUARIO_ADMIN_LISTAR_FAIL:
             return {loading: false, error: action.payload}
         
+        case USUARIO_ADMIN_LISTAR_RESET:
+            return { usuarios: []}
+        
+        default:
+            return state
+    }
+
+}
+
+
+//Reducer para os administradores excluirem usuários
+export const usuarioDeletarReducer = (state = { }, action) => {
+    
+    switch (action.type){
+
+        case USUARIO_ADMIN_DELETAR_REQUEST:
+            return {loading: true }
+
+        case USUARIO_ADMIN_DELETAR_SUCCESS:
+            return {loading: false, success:true}
+
+        case USUARIO_ADMIN_DELETAR_FAIL:
+            return {loading: false, error: action.payload}
+    
         default:
             return state
     }

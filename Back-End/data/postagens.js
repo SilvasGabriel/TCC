@@ -13,7 +13,7 @@ const postagens = [
   },
   {
     name: 'Aula 03',
-    image: '/images/Dance_Gif.gif',
+    image:  '/images/grupo_de_danca.jpg',
     description:
       'Aula de Dança de Salão',
   },
@@ -25,9 +25,9 @@ const postagens = [
   },
   {
     name: 'Aula 05',
-    image: '/images/grupo_de_danca.jpg',
+    image: '/images/casal_zouk.jpg',
     description:
-      'Aula de Samba...',
+      'Aula de Zuck...',
   },
   {
     name: 'Aula 06',

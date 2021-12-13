@@ -17,25 +17,50 @@ import Loader from '../Components/Loader'
 import { FaCheckCircle, FaTimesCircle, FaEdit, FaTrash } from 'react-icons/fa'
 
 //Redux Actions
-import { listarUsuários } from '../Redux/Actions/usuarioActions'
+import { listarUsuarios, deletarUsuarios } from '../Redux/Actions/usuarioActions'
 
 
-const UsuariosScreen = () => {
+const UsuariosScreen = ({history}) => {
     
     const dispatch = useDispatch()
 
     const usuarioListar = useSelector((state)=> state.usuarioListar)
     const {loading, error, usuarios} = usuarioListar
 
+    const usuarioLogin = useSelector((state)=> state.usuarioLogin)
+    const { usuarioInfo } = usuarioLogin
+
+    const usuarioDeletar = useSelector((state)=> state.usuarioDeletar)
+    const {success: successDelete} = usuarioDeletar
+
+
+    const deletarHandler = (id) => {
+
+        if(window.confirm("Você tem certeza?")){
+            
+            dispatch(deletarUsuarios(id))
+
+            window.location.reload()
+            
+        }  
+    
+    }
+
     useEffect(() => {
 
-        dispatch( listarUsuários() )
+        if(usuarioInfo && usuarioInfo.isAdmin){
 
-    }, [dispatch])
+            dispatch( listarUsuarios() )
 
-    const deletarHandler = (id) =>{
-        console.log('deletar')
-    }
+        }else{
+
+            history.push('/login')
+
+        }
+
+
+    }, [dispatch, history, usuarioInfo, successDelete])
+
 
     return (
         <>
@@ -87,7 +112,7 @@ const UsuariosScreen = () => {
 
                                     </LinkContainer>
 
-                                    <Button variant='danger' className='btn-sm' onClick={()=> deletarHandler(usuario._id)}>
+                                    <Button variant='danger' className='btn-sm' disabled={usuarioInfo._id === usuario._id} onClick={ () => deletarHandler(usuario._id)}>
 
                                         <FaTrash/>
 

@@ -23,6 +23,11 @@ import {
     USUARIO_ADMIN_LISTAR_REQUEST,
     USUARIO_ADMIN_LISTAR_SUCCESS,
     USUARIO_ADMIN_LISTAR_FAIL,
+    USUARIO_ADMIN_LISTAR_RESET,
+
+    USUARIO_ADMIN_DELETAR_REQUEST,
+    USUARIO_ADMIN_DELETAR_SUCCESS,
+    USUARIO_ADMIN_DELETAR_FAIL,
 } from '../Constants/usuariosConstants'
 
 import axios from 'axios'
@@ -68,6 +73,7 @@ export const logout = () => (dispatch) => {
 
     localStorage.removeItem('usuarioInfo')
     
+    dispatch({type: USUARIO_ADMIN_LISTAR_RESET})
     dispatch({type: USUARIO_ATUALIZAR_RESET})
     dispatch({type: USUARIO_DETALHES_RESET})
     dispatch({type: USUARIO_LOGOUT})
@@ -194,7 +200,7 @@ export const atualizarPerfil = (usuario) => async(dispatch, getState) => {
 }
 
 //Action para o administrador listar os usuários
-export const listarUsuários = () => async(dispatch, getState) => {
+export const listarUsuarios = () => async(dispatch, getState) => {
 
     try {
         
@@ -216,11 +222,47 @@ export const listarUsuários = () => async(dispatch, getState) => {
             type: USUARIO_ADMIN_LISTAR_SUCCESS,
             payload: data,
         })
+        
 
     } catch (error) {
         
         dispatch({
             type: USUARIO_ADMIN_LISTAR_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message 
+            : error.message,
+        })
+
+    }
+}
+
+
+//Action para o administrador excluir usuários
+export const deletarUsuarios = (id) => async(dispatch, getState) => {
+
+    try {
+        
+        dispatch ({
+            type: USUARIO_ADMIN_DELETAR_REQUEST,
+        })
+
+        const { usuarioLogin: { usuarioInfo } } = getState()
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${usuarioInfo.token}`
+            }
+        }
+
+        await axios.delete(`/api/users/${id}`, config)
+
+        dispatch({
+            type: USUARIO_ADMIN_DELETAR_SUCCESS,
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type: USUARIO_ADMIN_DELETAR_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message 
             : error.message,
         })

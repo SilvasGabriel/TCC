@@ -7,6 +7,9 @@ import {
    registrarUsuario,
    atualizarPerfilUsuario,
    acessarUsuarios,
+   deletarUsuarios,
+   acessarUsuarioPeloId,
+   atualizarPerfilUsuarioId,
 } from '../controllers/usuarioController.js'
 
 import {
@@ -14,12 +17,19 @@ import {
    administrador,
 } from '../middleware/autorizarMiddleware.js'
 
-router.route('/').post(registrarUsuario).get(proteger, administrador, acessarUsuarios)
+router.route('/')
+   .post(registrarUsuario)
+   .get(proteger, administrador, acessarUsuarios)
 
 router.post('/login', autenticarUsuario)
 
 router.route('/perfil')
    .get(proteger ,acessarPerfilUsuario)
    .put(proteger, atualizarPerfilUsuario)
+
+router.route('/:id')
+      .delete(proteger, administrador, deletarUsuarios)
+      .get(proteger, administrador, acessarUsuarioPeloId)
+      .put(proteger, administrador, atualizarPerfilUsuarioId)
    
 export default router

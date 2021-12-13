@@ -10,7 +10,7 @@ const Postagem = ({postagem}) => {
     return (
         <Card className='my-3 py-3 rounded' >
             <Link to={`/postagem/${postagem._id}`}>
-                <Card.Img className='containerImg' src={postagem.image} variant='top'/>
+                <Card.Img  className='containerImg' src={postagem.image} variant='top'/>
             </Link>
 
             <Card.Body>

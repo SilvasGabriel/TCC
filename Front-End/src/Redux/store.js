@@ -22,6 +22,7 @@ import {
     usuarioAtualizarReducer,
     //usuários administradores
     usuarioListarReducer,
+    usuarioDeletarReducer,
 } from './Reducers/usuarioReducers'
 
 const reducer = combineReducers({
@@ -34,7 +35,9 @@ const reducer = combineReducers({
     usuarioRegister: usuarioRegisterReducer,
     usuarioDetalhes: usuarioDetalhesReducer,
     usuarioAtualizar: usuarioAtualizarReducer,
+    //Reducers para usuarios administradores
     usuarioListar: usuarioListarReducer,
+    usuarioDeletar: usuarioDeletarReducer,
 })
 
 

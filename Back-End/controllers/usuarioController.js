@@ -165,7 +165,91 @@ const acessarUsuarios = asyncHandler (async (req, res)=> {
    res.json(usuarios)
  
  })
+
+
+//@descrição  Administrador deleta um usuário
+//@rotas  DELETE /api/users/:id
+//@acesso Privado/Administrador
+
+const deletarUsuarios = asyncHandler (async (req, res)=> {
+
+    const usuario = await User.findById(req.params.id)
+
  
+    if(usuario){
+
+        await usuario.remove()
+
+        res.json({ message: 'Usuário removido com sucesso!' })
+
+    }else{
+        res.status(404)
+        throw new Error('Usuário não encontrado!')
+    }
+ 
+ })
+ 
+
+
+//@descrição  Administrador acessa um usuário especifico pelo ID
+//@rotas  GET /api/users/:id
+//@acesso Privado/Administrador
+
+const acessarUsuarioPeloId = asyncHandler (async (req, res)=> {
+
+    const usuario = await User.findById(req.params.id).select('-password')
+ 
+   if(usuario){
+
+    res.json(usuario)
+
+   }else{
+       res.status(404)
+       throw new Error('Usuário não encontrado!')
+   }
+ 
+ })
+
+
+
+//@descrição  Administrador atualiza dados do usuário pelo ID
+//@rotas  PUT /api/users/:id
+//@acesso Privado/Administrador
+
+const atualizarPerfilUsuarioId = asyncHandler( async(req, res) => {
+
+    const usuario = await User.findById(req.params.id)
+      
+    if(usuario){
+
+        usuario.name = req.body.name || usuario.name ,
+        usuario.email = req.body.email || usuario.email,
+        usuario.telefone = req.body.telefone || usuario.telefone,
+        usuario.faculdade = req.body.faculdade || usuario.faculdade,
+        usuario.matricula = req.body.matricula || usuario.matricula
+        usuario.isAdmin = req.body.isAdmin || usuario.isAdmin
+
+        const usuarioAtualizado = await usuario.save()
+
+        res.json({
+            _id: usuarioAtualizado._id,
+            name: usuarioAtualizado.name,
+            email: usuarioAtualizado.email,
+            telefone: usuarioAtualizado.telefone,
+            faculdade: usuarioAtualizado.faculdade,
+            matricula: usuarioAtualizado.matricula,      
+        })
+
+    }else{
+        res.status(404)
+        throw new Error('Usuário não encontrado!')
+    }
+
+}) 
+
+
+
+
 
 export {
     autenticarUsuario,
@@ -173,4 +257,7 @@ export {
     registrarUsuario,
     atualizarPerfilUsuario,
     acessarUsuarios,
+    deletarUsuarios,
+    acessarUsuarioPeloId,
+    atualizarPerfilUsuarioId,
 }
