@@ -28,6 +28,10 @@ import {
     USUARIO_ADMIN_DELETAR_REQUEST,
     USUARIO_ADMIN_DELETAR_SUCCESS,
     USUARIO_ADMIN_DELETAR_FAIL,
+
+    USUARIO_ADMIN_EDITAR_REQUEST,
+    USUARIO_ADMIN_EDITAR_SUCCESS,
+    USUARIO_ADMIN_EDITAR_FAIL,
 } from '../Constants/usuariosConstants'
 
 import axios from 'axios'
@@ -263,6 +267,47 @@ export const deletarUsuarios = (id) => async(dispatch, getState) => {
         
         dispatch({
             type: USUARIO_ADMIN_DELETAR_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message 
+            : error.message,
+        })
+
+    }
+}
+
+
+//Action para o administrador edita usuários
+export const editarUsuarios = (usuario) => async(dispatch, getState) => {
+
+    try {
+        
+        dispatch ({
+            type: USUARIO_ADMIN_EDITAR_REQUEST,
+        })
+
+        const { usuarioLogin: { usuarioInfo } } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${usuarioInfo.token}`
+            }
+        }
+
+       const {data} =  await axios.put(`/api/users/${usuario._id}`, usuario, config)
+
+        dispatch({
+            type: USUARIO_ADMIN_EDITAR_SUCCESS,
+        })
+
+        dispatch({
+            type: USUARIO_DETALHES_SUCCESS,
+            payload: data,
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type: USUARIO_ADMIN_EDITAR_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message 
             : error.message,
         })

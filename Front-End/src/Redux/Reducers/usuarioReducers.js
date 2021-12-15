@@ -25,10 +25,14 @@ import {
     USUARIO_ADMIN_LISTAR_FAIL,
     USUARIO_ADMIN_LISTAR_RESET,
 
-
     USUARIO_ADMIN_DELETAR_REQUEST,
     USUARIO_ADMIN_DELETAR_SUCCESS,
     USUARIO_ADMIN_DELETAR_FAIL,
+
+    USUARIO_ADMIN_EDITAR_REQUEST,
+    USUARIO_ADMIN_EDITAR_SUCCESS,
+    USUARIO_ADMIN_EDITAR_FAIL,
+    USUARIO_ADMIN_EDITAR_RESET,
 } from '../Constants/usuariosConstants'
 
 
@@ -160,6 +164,31 @@ export const usuarioDeletarReducer = (state = { }, action) => {
 
         case USUARIO_ADMIN_DELETAR_FAIL:
             return {loading: false, error: action.payload}
+    
+        default:
+            return state
+    }
+
+}
+
+
+
+//Reducer para os administradores editarem usuários
+export const usuarioEditarReducer = (state = { usuario: {} }, action) => {
+    
+    switch (action.type){
+
+        case USUARIO_ADMIN_EDITAR_REQUEST:
+            return {loading: true }
+
+        case USUARIO_ADMIN_EDITAR_SUCCESS:
+            return {loading: false, success:true}
+
+        case USUARIO_ADMIN_EDITAR_FAIL:
+            return {loading: false, error: action.payload}
+        
+        case USUARIO_ADMIN_EDITAR_RESET:
+            return { usuario: {} }
     
         default:
             return state

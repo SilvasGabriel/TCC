@@ -102,9 +102,11 @@ const UsuariosScreen = ({history}) => {
                                     )}
                                 </td>
                                 <td>
-                                    <LinkContainer to={`/admin/users/${usuario._id}/editar`}>
 
-                                        <Button variant='dark' className='btn-sm'>
+
+                                    <LinkContainer to={`/admin/editar/${usuario._id}`}>
+
+                                        <Button variant='dark' className='btn-sm'  disabled={ usuarioInfo._id === usuario._id}>
 
                                             <FaEdit />
 
@@ -112,7 +114,7 @@ const UsuariosScreen = ({history}) => {
 
                                     </LinkContainer>
 
-                                    <Button variant='danger' className='btn-sm' disabled={usuarioInfo._id === usuario._id} onClick={ () => deletarHandler(usuario._id)}>
+                                    <Button variant='danger' className='btn-sm' disabled={ usuarioInfo._id === usuario._id} onClick={() => deletarHandler(usuario._id)}>
 
                                         <FaTrash/>
 

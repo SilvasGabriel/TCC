@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState} from 'react'
 
 //React-Router
 import { Link } from 'react-router-dom'
@@ -30,6 +30,7 @@ const RegistroScreen = ({ location, history }) => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState(null)
 
+
     const dispatch = useDispatch()
 
     const usuarioRegister = useSelector((state) => state.usuarioRegister)
@@ -43,20 +44,22 @@ const RegistroScreen = ({ location, history }) => {
         }
     }, [history, usuarioInfo, redirect])
 
-   
+
     const submitHandler = (e) => {
         e.preventDefault()
+
         //Checar a senha
-        if(password !== confirmPassword){
+        if (password !== confirmPassword) {
             setMessage('As senhas não conferem,confira novamente!')
-        }else{
+        } else {
             //DISPATCH REGISTRO
-            dispatch(register(name,email,password,telefone,faculdade,matricula,))
+            dispatch(register(name, email, password, telefone, faculdade, matricula,))
         }
-        
+
     }
 
     return (
+
         <FormContainer>
             <h1>Registro</h1>
 
@@ -124,10 +127,11 @@ const RegistroScreen = ({ location, history }) => {
                         onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
                 </Form.Group>
 
-                    
-                <Button type='submit' variant='primary' className='my-4'>Criar Cadastro</Button>
+
+                <Button type='submit' variant='primary' className='my-3'>Criar Cadastro</Button>
 
             </Form>
+
 
             <Row className='py-3'>
                 <Col>

@@ -9,7 +9,7 @@ import Postagem from '../models/postagensModel.js'
 
 const getPostagens = asyncHandler(async(req, res) => {
 
-    const postagens  = await Postagem.find({})
+    const postagens  = await Postagem.find({}).sort({createdAt: 'desc'})
 
     res.json(postagens)
 
