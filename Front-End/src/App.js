@@ -20,6 +20,7 @@ import PerfilScreen from './Screens/PerfilScreen'
 //Telas Administrador
 import UsuariosScreen from './ScreensAdmin/UsuariosScreen'
 import UsuariosEditarScreen from './ScreensAdmin/UsuariosEditarScreen'
+import PostagensScreen from './ScreensAdmin/PostagensScreen'
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
               <Route path='/postagem/:id' component={PostScreen}/>
               <Route path='/admin/usuarios' component={UsuariosScreen}/>
               <Route path='/admin/editar/:id' component={UsuariosEditarScreen}/>
+              <Route path='/admin/postagens' component={PostagensScreen}/>
               <Route exact path='/' component={HomeScreen}/> 
         </Container>
       </main>
