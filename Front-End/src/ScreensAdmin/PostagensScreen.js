@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 
 //React-Router-Bootstrap
 import { LinkContainer } from 'react-router-bootstrap'
 
 //React-Bootstrap
-import { Table, Button, Row, Col} from 'react-bootstrap'
+import { Table, Button, Row, Col } from 'react-bootstrap'
 
 //React-Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,22 +17,34 @@ import Loader from '../Components/Loader'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 
 //Redux Actions
-import { listaPostagens, } from '../Redux/Actions/postagemActions'
+import { listaPostagens, deletarPostagem } from '../Redux/Actions/postagemActions'
 
 
-const PostagensScreen = ({history, match}) => {
-    
+const PostagensScreen = ({ history, match }) => {
+
     const dispatch = useDispatch()
 
     const postagemLista = useSelector((state) => state.postagemLista)
-    const {loading, error, postagens} = postagemLista
+    const { loading, error, postagens } = postagemLista
 
-    const usuarioLogin = useSelector((state)=> state.usuarioLogin)
+    const postagemDeletar= useSelector((state) => state.postagemDeletar)
+    const {
+        loading: LoadingDeletar, 
+        error: errorDeletar,
+        success: successDeletar } = postagemDeletar
+
+    const usuarioLogin = useSelector((state) => state.usuarioLogin)
     const { usuarioInfo } = usuarioLogin
 
 
     const deletarHandler = (id) => {
         //DELETAR POSTAGEM
+        if (window.confirm('Você tem certeza que deseja excluir esta postagem?')) {
+
+            dispatch( deletarPostagem(id) )
+
+        }
+
     }
 
     const criarPostagemHandler = (postagem) => {
@@ -41,18 +53,18 @@ const PostagensScreen = ({history, match}) => {
 
     useEffect(() => {
 
-        if(usuarioInfo && usuarioInfo.isAdmin){
+        if (usuarioInfo && usuarioInfo.isAdmin) {
 
-            dispatch( listaPostagens() )
+            dispatch(listaPostagens())
 
-        }else{
+        } else {
 
             history.push('/login')
 
         }
 
 
-    }, [dispatch, history, usuarioInfo])
+    }, [dispatch, history, usuarioInfo, successDeletar])
 
 
     return (
@@ -68,55 +80,58 @@ const PostagensScreen = ({history, match}) => {
                 </Col>
             </Row>
 
-            {loading ? 
-                <Loader/>
-            : error ?
-                <Message variant='danger'>{error}</Message>
-            : (
-                <Table striped bordered hover responsive className='table-sm'>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NOME</th>
-                            <th>IMAGE</th>
-                            <th>DESCRIPTION</th>
-                            <th>ADMINISTRADOR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { postagens.map( (postagem) => (
-                            
-                            <tr key={postagem._id} > 
-                            
-                                <td>{postagem._id}</td>
-                                <td>{postagem.name}</td>
-                                <td>{postagem.image}</td>
-                                <td>{postagem.description}</td>
-                              
-                                <td>
+            {LoadingDeletar && <Loader/>}
+            {errorDeletar && <Message variant='danger'>{errorDeletar}</Message>}
 
-                                    <LinkContainer to={`/admin/postagem/${postagem._id}`}>
+            {loading ?
+                <Loader />
+                : error ?
+                    <Message variant='danger'>{error}</Message>
+                    : (
+                        <Table striped bordered hover responsive className='table-sm'>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NOME</th>
+                                    <th>IMAGE</th>
+                                    <th>DESCRIPTION</th>
+                                    <th>ADMINISTRADOR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {postagens.map((postagem) => (
 
-                                        <Button variant='dark' className='btn-sm'>
+                                    <tr key={postagem._id} >
 
-                                            <FaEdit />
+                                        <td>{postagem._id}</td>
+                                        <td>{postagem.name}</td>
+                                        <td>{postagem.image}</td>
+                                        <td>{postagem.description}</td>
 
-                                        </Button>
+                                        <td>
 
-                                    </LinkContainer>
+                                            <LinkContainer to={`/admin/postagem/${postagem._id}`}>
 
-                                    <Button variant='danger' className='btn-sm'onClick={() => deletarHandler(postagem._id)}>
+                                                <Button variant='dark' className='btn-sm'>
 
-                                        <FaTrash/>
+                                                    <FaEdit />
 
-                                    </Button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
-            )
-            }  
+                                                </Button>
+
+                                            </LinkContainer>
+
+                                            <Button variant='danger' className='btn-sm' onClick={() => deletarHandler(postagem._id)}>
+
+                                                <FaTrash />
+
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    )
+            }
         </>
     )
 }
