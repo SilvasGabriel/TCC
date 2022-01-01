@@ -5,6 +5,8 @@ import {
     getPostagens,
     getPostagensById,
     deletePostagens,
+    registrarPostagens,
+    atualizarPostagens,
 } from '../controllers/postagemController.js'
 
 import {
@@ -14,11 +16,13 @@ import {
 
 
 
-router.route('/').get(getPostagens)
+router.route('/')
+        .get(getPostagens)
+        .post(proteger, administrador, registrarPostagens)
 
 router.route('/:id')
         .get(getPostagensById)
         .delete(proteger, administrador, deletePostagens)
-
+        .put(proteger, administrador, atualizarPostagens)
 
 export default router
