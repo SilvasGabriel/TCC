@@ -10,6 +10,10 @@ import {
     POSTAGEM_DELETAR_REQUEST,
     POSTAGEM_DELETAR_SUCCESS,
     POSTAGEM_DELETAR_FAIL,
+
+    POSTAGEM_CRIAR_REQUEST,
+    POSTAGEM_CRIAR_SUCCESS,
+    POSTAGEM_CRIAR_FAIL,
 } from '../Constants/postagemConstants'
 
 //Axios
@@ -41,7 +45,7 @@ export const listaPostagens = () => async(dispatch) => {
 
 }
 
-//Actions para mostrar os detalhes de cada produto
+//Actions para mostrar os detalhes de cada postagem
 export const listaPostagemDetalhes = (id) => async(dispatch) => {
 
     try {
@@ -67,7 +71,7 @@ export const listaPostagemDetalhes = (id) => async(dispatch) => {
 
 }
 
-//Action para excluir um produto
+//Action para excluir uma postagem
 export const deletarPostagem = (id) => async (dispatch, getState) => {
 
     try {
@@ -94,6 +98,44 @@ export const deletarPostagem = (id) => async (dispatch, getState) => {
         
         dispatch({
             type: POSTAGEM_DELETAR_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message 
+            : error.message,
+        })
+
+    }
+
+
+}
+
+
+//Action para criar uma postagem
+export const criarPostagem = () => async (dispatch, getState) => {
+
+    try {
+        
+        dispatch({
+            type: POSTAGEM_CRIAR_REQUEST,
+        })
+
+        const {usuarioLogin: {usuarioInfo} } = getState()
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${usuarioInfo.token}`,
+            }
+        }
+
+        const {data} = await axios.post('/api/postagens', {} ,config)
+
+        dispatch({
+            type: POSTAGEM_CRIAR_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type: POSTAGEM_CRIAR_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message 
             : error.message,
         })

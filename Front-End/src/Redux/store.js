@@ -11,7 +11,9 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
     postagemListaReducer,
     postagemDetalhesReducer,
+    //usuarios administradores
     postagemDeletarReducer,
+    postagemCriarReducer,
 } from './Reducers/postagemReducers'
 
 //usuariosReducer
@@ -34,6 +36,7 @@ const reducer = combineReducers({
     postagemDetalhes: postagemDetalhesReducer,
     //Reducer para postagem Administradores
     postagemDeletar: postagemDeletarReducer,
+    postagemCriar: postagemCriarReducer,
     //Reducers para usuarios
     usuarioLogin: usuarioLoginReducer,
     usuarioRegister: usuarioRegisterReducer,

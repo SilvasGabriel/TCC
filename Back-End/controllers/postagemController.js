@@ -64,9 +64,9 @@ const registrarPostagens = asyncHandler( async (req, res) => {
 
     const postagem = new Postagem ({
         user: req.usuario._id,
-        name: req.body.name,
-        image: req.body.image,
-        description: req.body.description,
+        name: 'Exemplo titulo...' || req.body.name,
+        image: '/images/sample.jpg' || req.body.image,
+        description: 'Exemplo descrição...' || req.body.description,
     })
 
     const criarPostagem = await postagem.save()

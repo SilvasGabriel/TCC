@@ -17,7 +17,10 @@ import Loader from '../Components/Loader'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 
 //Redux Actions
-import { listaPostagens, deletarPostagem } from '../Redux/Actions/postagemActions'
+import { listaPostagens, deletarPostagem, criarPostagem } from '../Redux/Actions/postagemActions'
+
+//Constants
+import { POSTAGEM_CRIAR_RESET } from '../Redux/Constants/postagemConstants' 
 
 
 const PostagensScreen = ({ history, match }) => {
@@ -33,6 +36,14 @@ const PostagensScreen = ({ history, match }) => {
         error: errorDeletar,
         success: successDeletar } = postagemDeletar
 
+    const postagemCriar = useSelector((state) => state.postagemCriar)
+    const{
+        loading: LoadingCriar,
+        error: errorCriar,
+        success: successCriar,
+        postagem: postagemCriada
+    } = postagemCriar
+
     const usuarioLogin = useSelector((state) => state.usuarioLogin)
     const { usuarioInfo } = usuarioLogin
 
@@ -47,11 +58,14 @@ const PostagensScreen = ({ history, match }) => {
 
     }
 
-    const criarPostagemHandler = (postagem) => {
+    const criarPostagemHandler = () => {
         //CRIAR POSTAGEM
+        dispatch( criarPostagem())
     }
 
     useEffect(() => {
+
+        dispatch({type: POSTAGEM_CRIAR_RESET})
 
         if (usuarioInfo && usuarioInfo.isAdmin) {
 
@@ -63,8 +77,18 @@ const PostagensScreen = ({ history, match }) => {
 
         }
 
+        if(successCriar){
 
-    }, [dispatch, history, usuarioInfo, successDeletar])
+            history.push(`/admin/postagens/${postagemCriada._id}/edit`)
+        
+        }else{
+
+            dispatch(listaPostagens())
+        
+        }
+
+
+    }, [dispatch, history, usuarioInfo, successDeletar, successCriar, postagemCriada])
 
 
     return (
@@ -82,6 +106,9 @@ const PostagensScreen = ({ history, match }) => {
 
             {LoadingDeletar && <Loader/>}
             {errorDeletar && <Message variant='danger'>{errorDeletar}</Message>}
+
+            {LoadingCriar && <Loader/>}
+            {errorCriar && <Message variant='danger'>{errorCriar}</Message>}
 
             {loading ?
                 <Loader />

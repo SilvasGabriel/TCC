@@ -10,6 +10,11 @@ import {
     POSTAGEM_DELETAR_REQUEST,
     POSTAGEM_DELETAR_SUCCESS,
     POSTAGEM_DELETAR_FAIL,
+
+    POSTAGEM_CRIAR_REQUEST,
+    POSTAGEM_CRIAR_SUCCESS,
+    POSTAGEM_CRIAR_FAIL,
+    POSTAGEM_CRIAR_RESET,
 } from '../Constants/postagemConstants'
 
 
@@ -68,6 +73,29 @@ export const postagemDeletarReducer = (state = {}, action) => {
 
         case POSTAGEM_DELETAR_FAIL:
             return {loading: false, error: action.payload}
+
+        default:
+            return state
+    }
+
+}
+
+//Reducer para criar uma postagem
+export const postagemCriarReducer = (state = {}, action) => {
+    
+    switch (action.type){
+
+        case POSTAGEM_CRIAR_REQUEST:
+            return {loading: true, }
+
+        case POSTAGEM_CRIAR_SUCCESS:
+            return {loading: false, success: true, postagem: action.payload}
+
+        case POSTAGEM_CRIAR_FAIL:
+            return {loading: false, error: action.payload}
+
+        case POSTAGEM_CRIAR_RESET:
+            return {}
 
         default:
             return state
