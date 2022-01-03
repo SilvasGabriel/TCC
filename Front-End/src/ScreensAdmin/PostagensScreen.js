@@ -137,7 +137,7 @@ const PostagensScreen = ({ history, match }) => {
 
                                         <td>
 
-                                            <LinkContainer to={`/admin/postagem/${postagem._id}`}>
+                                            <LinkContainer to={`/admin/atualizar/${postagem._id}`}>
 
                                                 <Button variant='dark' className='btn-sm'>
 

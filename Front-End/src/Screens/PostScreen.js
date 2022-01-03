@@ -29,7 +29,7 @@ const PostScreen = ({ match }) => {
 
     return (
         <>
-            <Link className='btn btn-dark my-3' to='/'>
+            <Link className='btn btn-dark my-3' to='/artigos'>
                 Voltar
             </Link>
 

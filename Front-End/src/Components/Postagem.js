@@ -20,8 +20,9 @@ const Postagem = ({postagem}) => {
                 </Card.Title>
             </Link>
 
+
             <Card.Text as='h6'>
-                    {postagem.createdAt}
+               Criado: {postagem.createdAt}
             </Card.Text>
 
             </Card.Body>

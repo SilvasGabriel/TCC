@@ -12,6 +12,7 @@ import Footer from './Components/Footer'
 
 //Telas Usuário
 import HomeScreen from './Screens/HomeScreen'
+import ArtigosScreen from './Screens/ArtigosScreen'
 import PostScreen from './Screens/PostScreen'
 import LoginScreen from './Screens/LoginScreen'
 import RegistroScreen from './Screens/RegistroScreen'
@@ -21,6 +22,7 @@ import PerfilScreen from './Screens/PerfilScreen'
 import UsuariosScreen from './ScreensAdmin/UsuariosScreen'
 import UsuariosEditarScreen from './ScreensAdmin/UsuariosEditarScreen'
 import PostagensScreen from './ScreensAdmin/PostagensScreen'
+import PostagensEditarScreen from './ScreensAdmin/PostagensEditarScreen'
 
 const App = () => {
   return (
@@ -35,6 +37,8 @@ const App = () => {
               <Route path='/admin/usuarios' component={UsuariosScreen}/>
               <Route path='/admin/editar/:id' component={UsuariosEditarScreen}/>
               <Route path='/admin/postagens' component={PostagensScreen}/>
+              <Route path='/admin/atualizar/:id' component={PostagensEditarScreen}/>
+              <Route path='/artigos' component={ArtigosScreen} />
               <Route exact path='/' component={HomeScreen}/> 
         </Container>
       </main>
