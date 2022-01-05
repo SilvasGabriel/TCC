@@ -104,7 +104,7 @@ const UsuariosScreen = ({history}) => {
                                 <td>
 
 
-                                    <LinkContainer to={`/admin/editar/${usuario._id}`}>
+                                    <LinkContainer to={`/admin/editarUsuario/${usuario._id}`}>
 
                                         <Button variant='dark' className='btn-sm'  disabled={ usuarioInfo._id === usuario._id}>
 

@@ -35,9 +35,9 @@ const App = () => {
               <Route path='/perfil' component={PerfilScreen} />
               <Route path='/postagem/:id' component={PostScreen}/>
               <Route path='/admin/usuarios' component={UsuariosScreen}/>
-              <Route path='/admin/editar/:id' component={UsuariosEditarScreen}/>
+              <Route path='/admin/editarUsuario/:id' component={UsuariosEditarScreen}/>
               <Route path='/admin/postagens' component={PostagensScreen}/>
-              <Route path='/admin/atualizar/:id' component={PostagensEditarScreen}/>
+              <Route path='/admin/editarPostagem/:id' component={PostagensEditarScreen}/>
               <Route path='/artigos' component={ArtigosScreen} />
               <Route exact path='/' component={HomeScreen}/> 
         </Container>

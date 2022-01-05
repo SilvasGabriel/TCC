@@ -15,6 +15,11 @@ import {
     POSTAGEM_CRIAR_SUCCESS,
     POSTAGEM_CRIAR_FAIL,
     POSTAGEM_CRIAR_RESET,
+
+    POSTAGEM_ATAULIZAR_REQUEST,
+    POSTAGEM_ATUALIZAR_SUCCESS,
+    POSTAGEM_ATUALIZAR_FAIL,
+    POSTAGEM_ATUALIZAR_RESET,
 } from '../Constants/postagemConstants'
 
 
@@ -96,6 +101,29 @@ export const postagemCriarReducer = (state = {}, action) => {
 
         case POSTAGEM_CRIAR_RESET:
             return {}
+
+        default:
+            return state
+    }
+
+}
+
+//Reducer para atualizar uma postagem
+export const postagemAtualizarReducer = (state =  { postagem: {} }, action) => {
+    
+    switch (action.type){
+
+        case POSTAGEM_ATAULIZAR_REQUEST:
+            return {loading: true, }
+
+        case POSTAGEM_ATUALIZAR_SUCCESS:
+            return {loading: false, success: true, postagem: action.payload}
+
+        case POSTAGEM_ATUALIZAR_FAIL:
+            return {loading: false, error: action.payload}
+
+        case POSTAGEM_ATUALIZAR_RESET:
+            return { postagem: {} }
 
         default:
             return state

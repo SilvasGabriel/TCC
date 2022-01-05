@@ -79,7 +79,7 @@ const PostagensScreen = ({ history, match }) => {
 
         if(successCriar){
 
-            history.push(`/admin/postagens/${postagemCriada._id}/edit`)
+            history.push(`/admin/editarPostagem/${postagemCriada._id}`)
         
         }else{
 
@@ -137,7 +137,7 @@ const PostagensScreen = ({ history, match }) => {
 
                                         <td>
 
-                                            <LinkContainer to={`/admin/atualizar/${postagem._id}`}>
+                                            <LinkContainer to={`/admin/editarPostagem/${postagem._id}`}>
 
                                                 <Button variant='dark' className='btn-sm'>
 

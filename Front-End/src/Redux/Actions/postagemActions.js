@@ -14,6 +14,10 @@ import {
     POSTAGEM_CRIAR_REQUEST,
     POSTAGEM_CRIAR_SUCCESS,
     POSTAGEM_CRIAR_FAIL,
+
+    POSTAGEM_ATAULIZAR_REQUEST,
+    POSTAGEM_ATUALIZAR_SUCCESS,
+    POSTAGEM_ATUALIZAR_FAIL,
 } from '../Constants/postagemConstants'
 
 //Axios
@@ -136,6 +140,46 @@ export const criarPostagem = () => async (dispatch, getState) => {
         
         dispatch({
             type: POSTAGEM_CRIAR_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message 
+            : error.message,
+        })
+
+    }
+
+
+}
+
+
+
+//Action para atualizar uma postagem
+export const atualizarPostagem = (postagem) => async (dispatch, getState) => {
+
+    try {
+        
+        dispatch({
+            type: POSTAGEM_ATAULIZAR_REQUEST,
+        })
+
+        const {usuarioLogin: {usuarioInfo} } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${usuarioInfo.token}`,
+            }
+        }
+
+        const {data} = await axios.put(`/api/postagens/${postagem._id}`, postagem ,config)
+
+        dispatch({
+            type: POSTAGEM_ATUALIZAR_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type: POSTAGEM_ATUALIZAR_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message 
             : error.message,
         })

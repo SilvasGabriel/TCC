@@ -14,6 +14,7 @@ import {
     //usuarios administradores
     postagemDeletarReducer,
     postagemCriarReducer,
+    postagemAtualizarReducer,
 } from './Reducers/postagemReducers'
 
 //usuariosReducer
@@ -37,6 +38,7 @@ const reducer = combineReducers({
     //Reducer para postagem Administradores
     postagemDeletar: postagemDeletarReducer,
     postagemCriar: postagemCriarReducer,
+    postagemAtualizar: postagemAtualizarReducer,
     //Reducers para usuarios
     usuarioLogin: usuarioLoginReducer,
     usuarioRegister: usuarioRegisterReducer,
