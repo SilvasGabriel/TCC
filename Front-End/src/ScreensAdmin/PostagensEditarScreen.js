@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
+
 //React-Router
 import { Link } from 'react-router-dom'
 
@@ -78,6 +79,7 @@ const PostagensEditarScreen = ({ match, history }) => {
         }))
     }
 
+
     return (
         <>
             <Link to='/admin/postagens' className='btn btn-light my-4'>
@@ -115,6 +117,7 @@ const PostagensEditarScreen = ({ match, history }) => {
                                         placeholder='Digite a url/endereço da imagem'
                                         value={image}
                                         onChange={(e) => setImage(e.target.value)}></Form.Control>
+                                    
                                 </Form.Group>
 
                                 <Form.Group controlId='description' className='my-4'>
