@@ -15,11 +15,10 @@ conectarDB()
 //Rotas
 import postagensRoutes from './routes/postagensRoutes.js'
 import usuarioRoutes from './routes/usuariosRoutes.js'
-import uploadRoutes from './routes/uploadRoutes.js'
 
 app.use('/api/postagens', postagensRoutes)
 app.use('/api/users', usuarioRoutes)
-app.use('/api/upload', uploadRoutes)
+
 
 //Middlewares de erro
 import {notFound, errorHandler} from './middleware/errorMiddleware.js'
@@ -33,10 +32,7 @@ app.get('/', (req, res)=>{
 })
 
 //Deixar a pasta estatica no express
-import path from 'path'
 
-const __dirname = path.resolve()
-app.use('/images', express.static(path.join(__dirname, '/images')))
 
 const PORTA = process.env.PORTA || 5000
 
