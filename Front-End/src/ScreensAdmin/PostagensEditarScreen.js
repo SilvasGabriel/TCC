@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import axios from 'axios'
 
 //React-Router
 import { Link } from 'react-router-dom'
@@ -30,6 +30,7 @@ const PostagensEditarScreen = ({ match, history }) => {
     const [name, setName] = useState('')
     const [image, setImage] = useState('')
     const [description, setDescription] = useState('')
+    const [uploading, setUploading] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -66,6 +67,29 @@ const PostagensEditarScreen = ({ match, history }) => {
 
     }, [dispatch, postagem, postagemId, history, successAtualizar])
 
+
+    const uploadFileHandler = async (e) => {
+        const file = e.target.files[0]
+        const formData = new FormData()
+        formData.append('image', file)
+        setUploading(true)
+     
+        try {
+          const config = {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+     
+          const { data } = await axios.post('/api/uploads', formData, config)
+     
+          setImage(data)
+          setUploading(false)
+        } catch (error) {
+          console.error(error)
+          setUploading(false)
+        }
+      }
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -117,7 +141,14 @@ const PostagensEditarScreen = ({ match, history }) => {
                                         placeholder='Digite a url/endereço da imagem'
                                         value={image}
                                         onChange={(e) => setImage(e.target.value)}></Form.Control>
-                                    
+                                    <Form.Control 
+                                         type="file"
+                                         id="image-file"
+                                         label="Choose file"
+                                         custom
+                                         onChange={uploadFileHandler}
+                                    />
+                                     {uploading && <Loader />}
                                 </Form.Group>
 
                                 <Form.Group controlId='description' className='my-4'>
