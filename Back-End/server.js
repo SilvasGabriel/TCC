@@ -24,7 +24,7 @@ app.use('/api/uploads', uploadRoutes)
 
 //Deixar a pasta estática para salvar imagens
 const __dirname = path.resolve()
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+app.use('/images', express.static(path.join(__dirname, '/images')))
 
 
 //Middlewares de erro

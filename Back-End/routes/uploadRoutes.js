@@ -5,7 +5,7 @@ const router = express.Router();
  
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, 'uploads/');
+    cb(null, 'images/');
   },
   filename(req, file, cb) {
     cb(
@@ -16,6 +16,7 @@ const storage = multer.diskStorage({
 });
  
 function checkFileType(file, cb) {
+
   const filetypes = /jpg|jpeg|png|gif/;
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = filetypes.test(file.mimetype);
@@ -35,7 +36,7 @@ const upload = multer({
 });
  
 router.post('/', upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`);
+  res.send(`/${req.file.path.replace(/\\/g, "/")}`);
 });
  
 export default router;
