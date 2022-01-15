@@ -105,6 +105,37 @@ const atualizarPostagens = asyncHandler( async (req, res) => {
 
 
 
+//@descrição Inscrição para aula
+//@rotas  POST /api/postagens/:id/register
+//@acesso Privado
+
+const inscricaoPostagens = asyncHandler( async (req, res) => {
+
+    const { prenome } = req.body
+
+    const postagem = await Postagem.findById(req.params.id)
+
+    if(postagem){
+
+      const registro = {
+          name: req.usuario.name,
+          prenome,
+          user: req.usuario._id,
+      }
+
+      postagem.registros.push(registro)
+
+      await postagem.save()
+      res.status(201).json({ message: 'Inscrição concluida!'})
+      
+    }else{
+        res.status(404)
+        throw new Error ('Postagem não encontrada!')
+    }
+
+})
+
+
 
 export {
     getPostagens,
@@ -112,4 +143,5 @@ export {
     deletePostagens,
     registrarPostagens,
     atualizarPostagens,
+    inscricaoPostagens,
 }

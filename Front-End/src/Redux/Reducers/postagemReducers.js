@@ -20,6 +20,11 @@ import {
     POSTAGEM_ATUALIZAR_SUCCESS,
     POSTAGEM_ATUALIZAR_FAIL,
     POSTAGEM_ATUALIZAR_RESET,
+
+    POSTAGEM_INSCRICAO_REQUEST,
+    POSTAGEM_INSCRICAO_SUCCESS,
+    POSTAGEM_INSCRICAO_FAIL,
+    POSTAGEM_INSCRICAO_RESET,
 } from '../Constants/postagemConstants'
 
 
@@ -124,6 +129,30 @@ export const postagemAtualizarReducer = (state =  { postagem: {} }, action) => {
 
         case POSTAGEM_ATUALIZAR_RESET:
             return { postagem: {} }
+
+        default:
+            return state
+    }
+
+}
+
+
+//Reducer para fazer uma inscrição
+export const postagemInscricaoReducer = (state = { }, action) => {
+    
+    switch (action.type){
+
+        case POSTAGEM_INSCRICAO_REQUEST:
+            return {loading: true, }
+
+        case POSTAGEM_INSCRICAO_SUCCESS:
+            return {loading: false, success: true}
+
+        case POSTAGEM_INSCRICAO_FAIL:
+            return {loading: false, error: action.payload}
+
+        case POSTAGEM_INSCRICAO_RESET:
+            return {}
 
         default:
             return state

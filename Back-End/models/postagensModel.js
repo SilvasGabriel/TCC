@@ -1,14 +1,16 @@
 import mongoose from 'mongoose'
 
-const registerSchema = mongoose.Schema({
+const registroSchema = mongoose.Schema({
+    name: {type: String, required: true},
+    prenome: {type: String, required: true},
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'User',
-      },
-},{
-    timestamps: true
-})
+        ref: 'User'
+    },
+},
+{timestamps: true}
+)
 
 
 const postSchema = mongoose.Schema({
@@ -26,14 +28,13 @@ const postSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    registros: [registroSchema],
     description: {
         type: String,
         required: true,
     },
-    register:[registerSchema],
-   
 },{
-    timestamps: true
+    timestamps: true,
 })
 
 const Postagem = mongoose.model('Postagem', postSchema)

@@ -3,9 +3,14 @@ import {
     POSTAGEM_LISTA_REQUEST,
     POSTAGEM_LISTA_SUCCESS,
     POSTAGEM_LISTA_FAIL,
+
     POSTAGEM_DETALHES_REQUEST,
     POSTAGEM_DETALHES_SUCCESS,
     POSTAGEM_DETALHES_FAIL,
+
+    POSTAGEM_INSCRICAO_REQUEST,
+    POSTAGEM_INSCRICAO_SUCCESS,
+    POSTAGEM_INSCRICAO_FAIL,
     //Administradores
     POSTAGEM_DELETAR_REQUEST,
     POSTAGEM_DELETAR_SUCCESS,
@@ -188,3 +193,43 @@ export const atualizarPostagem = (postagem) => async (dispatch, getState) => {
 
 
 }
+
+
+
+//Action para criar a sua inscricao para a aula
+export const criarInscricao = (postagemId, registro) => async (dispatch, getState) => {
+
+    try {
+        
+        dispatch({
+            type: POSTAGEM_INSCRICAO_REQUEST,
+        })
+
+        const {usuarioLogin: {usuarioInfo} } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${usuarioInfo.token}`,
+            }
+        }
+
+        await axios.post(`/api/postagens/${postagemId}/register`, registro, config)
+
+        dispatch({
+            type: POSTAGEM_INSCRICAO_SUCCESS,
+        })
+
+    } catch (error) {
+        
+        dispatch({
+            type: POSTAGEM_INSCRICAO_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message 
+            : error.message,
+        })
+
+    }
+
+
+}
+

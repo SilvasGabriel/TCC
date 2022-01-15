@@ -7,6 +7,7 @@ import {
     deletePostagens,
     registrarPostagens,
     atualizarPostagens,
+    inscricaoPostagens,
 } from '../controllers/postagemController.js'
 
 import {
@@ -19,6 +20,8 @@ import {
 router.route('/')
         .get(getPostagens)
         .post(proteger, administrador, registrarPostagens)
+
+router.route('/:id/register').post(proteger, inscricaoPostagens)
 
 router.route('/:id')
         .get(getPostagensById)
