@@ -1,10 +1,12 @@
 import React from 'react'
 
+import PostCarrossel from '../Components/PostCarrosel'
+
 const HomeScreen = () => {
 
     return (
         <>
-            <h1>Carrossel...</h1>
+            <PostCarrossel/>
         </>
     )
 }
