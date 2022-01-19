@@ -120,9 +120,9 @@ const PostagensScreen = ({ history, match }) => {
                                 <tr>
                                     <th>ID</th>
                                     <th>NOME</th>
-                                    <th>IMAGE</th>
-                                    <th>DESCRIPTION</th>
-                                    <th>ADMINISTRADOR</th>
+                                    <th>IMAGEM</th>
+                                    <th>DESCRIÇÃO</th>
+                                    <th>EDITAR/EXCLUIR</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -135,9 +135,9 @@ const PostagensScreen = ({ history, match }) => {
                                         <td>{postagem.image}</td>
                                         <td>{postagem.description}</td>
 
-                                        <td>
+                                        <td style={{}}>
 
-                                            <LinkContainer to={`/admin/editarPostagem/${postagem._id}`}>
+                                            <LinkContainer to={`/admin/editarPostagem/${postagem._id}`} >
 
                                                 <Button variant='dark' className='btn-sm'>
 

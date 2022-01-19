@@ -80,6 +80,7 @@ const UsuariosScreen = ({history}) => {
                             <th>FACULDADE</th>
                             <th>NÚMERO DE MATRICULA</th>
                             <th>ADMINISTRADOR</th>
+                            <th>EDITAR/EXCLUIR</th>
                         </tr>
                     </thead>
                     <tbody>
