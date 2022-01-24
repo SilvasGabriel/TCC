@@ -149,7 +149,7 @@ const UsuariosEditarScreen = ({ match, history }) => {
 
                                 <Form.Group controlId='isAdmin' className='my-4'>
                                     <Form.Check type='checkbox'
-                                        label='isAdmin'
+                                        label='Administrador'
                                         checked={isAdmin}
                                         onChange={(e) => setIsAdmin(e.target.checked)}></Form.Check>
                                 </Form.Group>
