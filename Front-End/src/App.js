@@ -17,6 +17,7 @@ import PostScreen from './Screens/PostScreen'
 import LoginScreen from './Screens/LoginScreen'
 import RegistroScreen from './Screens/RegistroScreen'
 import PerfilScreen from './Screens/PerfilScreen'
+import SobreScreen from './Screens/SobreScreen'
 
 //Telas Administrador
 import UsuariosScreen from './ScreensAdmin/UsuariosScreen'
@@ -39,7 +40,8 @@ const App = () => {
               <Route path='/admin/postagens' component={PostagensScreen}/>
               <Route path='/admin/editarPostagem/:id' component={PostagensEditarScreen}/>
               <Route path='/artigos' component={ArtigosScreen} />
-              <Route exact path='/' component={HomeScreen}/> 
+              <Route exact path='/' component={HomeScreen}/>
+              <Route exact path='/sobre' component={SobreScreen}/>
         </Container>
       </main>
       <Footer/>

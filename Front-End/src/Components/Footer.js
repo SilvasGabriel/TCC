@@ -11,7 +11,7 @@ import { FaInstagramSquare, FaYoutubeSquare } from 'react-icons/fa'
 
 const Footer = () => {
     return (
-        <footer>
+        <footer style={{marginTop: "2.438rem"}}>
 
             <Container className='bgcolorF' fluid>
 

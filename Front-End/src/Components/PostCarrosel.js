@@ -39,7 +39,9 @@ const PostCarrossel = () => {
         </Message> : (
 
             <Carousel 
-            pause='hover' className='bg-dark'>
+            pause='hover' className='bg-dark'
+            style={{width: "100%", height: "31.25rem"}}
+            >
                 {postagens.map(postagem => (
                     <Carousel.Item key={postagem._id}>
                         <Link to={`/postagem/${postagem._id}`}>

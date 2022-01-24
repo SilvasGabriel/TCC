@@ -33,6 +33,23 @@ const users = [
         faculdade:'',
         matricula:'',
         password: bcrypt.hashSync('123456', 10),
+    },
+    {
+        name: 'Administrador',
+        email: 'administrador@gmail.com',
+        telefone:'',
+        faculdade:'',
+        matricula:'',
+        password: bcrypt.hashSync('123456', 10),
+        isAdmin: true,
+    },
+    {
+        name: 'Cliente',
+        email: 'cliente@gmail.com',
+        telefone:'',
+        faculdade:'',
+        matricula:'',
+        password: bcrypt.hashSync('123456', 10),
     }
 ]
 
